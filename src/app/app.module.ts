@@ -4,15 +4,18 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatListModule } from "@angular/material/list";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatGridListModule } from "@angular/material/grid-list";
 
 import { AppComponent } from './app.component';
 import "hammerjs";
 import { MenuComponent } from './menu/menu.component';
+import { DishdetailComponent } from './dishdetail/dishdetail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
+    DishdetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -20,6 +23,7 @@ import { MenuComponent } from './menu/menu.component';
     MatListModule,
     MatToolbarModule,
     FlexLayoutModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
