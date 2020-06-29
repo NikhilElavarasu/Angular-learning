@@ -11,7 +11,7 @@ body {
 
 .container {
   margin: 20px;
-  display:flex;
+  display: flex;
 }
 
 .card-container{
@@ -19,6 +19,11 @@ body {
   color: black;
 }
 
-.list-container{
+.comments{
   color: black;
+}
+
+.mat-line{
+  margin-top: 0px;
+  margin-bottom: 0px;
 }

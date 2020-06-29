@@ -3,7 +3,7 @@
     fxLayout.sm="column"
     fxLayout.xs="column"
     fxLayoutAlign.gt-md="space-around center"
-    fxLayoutGap="20px" 
+    fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
   <div fxFlex="40">
@@ -25,15 +25,16 @@
   </div>
 
   <div fxFlex="40">
-    <h3>COMMENTS</h3>
-    <div class="list-container">
+    <mat-list *ngIf=dish>
+      <h2>Comments</h2>
       <mat-list-item *ngFor="let comment of dish.comments">
-        <p matLine> 
-          <span>{{comment.comment}}</span> 
-        </p>
-        <h5 matLine>{{comment.rating}} stars</h5>
+        <div class="comments">
+          <p matLine>{{comment.comment}}</p>
+          <p matLine>{{comment.rating}} stars</p>
+          <p matLine>-- {{comment.author}} {{comment.date |date}}</p>
+        </div>
       </mat-list-item>
-    </div>
+    </mat-list>
   </div>
 
 </div>
