@@ -42,6 +42,15 @@ body {
   color: black;
 }
 
+.leaders{
+  color: black;
+  display: inline-flex;
+}
+
+.leaders > div, img {
+  padding: 5px;
+}
+
 .mat-line{
   margin-top: 0px;
   margin-bottom: 0px;
