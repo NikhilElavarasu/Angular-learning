@@ -11,7 +11,10 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatInputModule } from "@angular/material/input";
+import { ReactiveFormsModule } from "@angular/forms";
+import { MatSelectModule } from "@angular/material/select";
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -56,6 +59,9 @@ import "hammerjs";
     MatCheckboxModule,
     MatFormFieldModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatSlideToggleModule,
   ],
   providers: [
     DishService,
