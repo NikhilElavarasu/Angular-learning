@@ -24,6 +24,10 @@
     <button mat-raised-button color="primary" (click)="goBack()">Back</button>
   </div>
 
+  <div [hidden]="dish">
+    <mat-spinner></mat-spinner> <h5>Loading.. Please Wait!</h5>
+  </div>
+
   <div fxFlex="40">
     <mat-list *ngIf="dish">
       <h2>Comments</h2>
