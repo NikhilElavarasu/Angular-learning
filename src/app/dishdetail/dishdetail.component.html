@@ -25,31 +25,9 @@
     </mat-card>
     <br>
     <button mat-raised-button color="primary" (click)="goBack()">Back</button>
-  </div>
-  <div [hidden]="dish">
-    <mat-spinner></mat-spinner><h4>Loading.. Please Wait!</h4>
-  </div>
-  <div fxFlex="40" *ngIf="dish">
-    <mat-list>
-      <h2>Comments</h2>
-      <mat-list-item *ngFor="let comment of dish.comments">
-        <div class="comments">
-          <p matLine>{{comment.comment}}</p>
-          <p matLine>{{comment.rating}} stars</p>
-          <p matLine>-- {{comment.author}} {{comment.date |date}}</p>
-        </div>
-      </mat-list-item>
-      <mat-list-item>
-        <div class="comments" *ngIf="commentForm.valid">
-          <p matLine>{{commentForm.value['comment']}}</p>
-          <p matLine>{{commentForm.value['rating']}} stars</p>
-          <p matLine>-- {{commentForm.value['author']}}</p>
-        </div>
-      </mat-list-item>
-    </mat-list>
-    <div class="form">
+    <div>
       <h3>Leave a comment</h3>
-      <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="form">
         <p>
           <mat-form-field class="full-width">
             <input matInput type="text" formControlName="author" placeholder="Name" required>
@@ -69,6 +47,32 @@
         </p>
         <button mat-button type="submit" class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
       </form>
+    </div>
+  </div>
+  <div [hidden]="dish">
+    <mat-spinner></mat-spinner><h4>Loading.. Please Wait!</h4>
+  </div>
+  <div fxFlex="40" *ngIf="dish">
+    <mat-list>
+      <h2>Comments</h2>
+      <mat-list-item *ngFor="let comment of dish.comments">
+        <div class="comments">
+          <p matLine>{{comment.comment}}</p>
+          <p matLine>{{comment.rating}} stars</p>
+          <p matLine>-- {{comment.author}} {{comment.date |date}}</p>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <div>
+      <mat-list *ngIf="commentForm.valid">
+        <mat-list-item>
+          <div class="comments">
+            <p matLine>{{commentForm.value['comment']}}</p>
+            <p matLine>{{commentForm.value['rating']}} stars</p>
+            <p matLine>-- {{commentForm.value['author']}}</p>
+          </div>
+        </mat-list-item>
+      </mat-list>
     </div>
   </div>
 </div>

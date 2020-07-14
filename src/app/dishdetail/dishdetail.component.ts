@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Params, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
@@ -20,7 +20,6 @@ export class DishdetailComponent implements OnInit {
   next: string;
   comment: Comment;
   commentForm: FormGroup;
-  data: string;
 
   formErrors = {
     'author': '',
@@ -99,7 +98,8 @@ export class DishdetailComponent implements OnInit {
 
   onSubmit() {
     this.comment = this.commentForm.value;
-    this.comment['date'] = String(Date.now())
+    const date = new Date();
+    this.comment['date'] = date.toISOString();
     this.dish.comments.push(this.comment);
     console.log(this.comment);
     this.commentForm.reset({
