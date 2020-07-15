@@ -15,6 +15,7 @@ import { switchMap } from 'rxjs/operators';
 export class DishdetailComponent implements OnInit {
   
   dish: Dish;
+  copydish: Dish;
   dishIds: string[];
   prev: string;
   next: string;
@@ -51,8 +52,10 @@ export class DishdetailComponent implements OnInit {
     this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
       .subscribe(dish => {
         this.dish = dish;
+        this.copydish = dish;
         this.setPrevNext(dish.id);
-      })
+      },
+      errmess => this.errmess = <any>errmess)
   }
 
   goBack(): void {
@@ -102,7 +105,18 @@ export class DishdetailComponent implements OnInit {
     this.comment = this.commentForm.value;
     const date = new Date();
     this.comment['date'] = date.toISOString();
-    this.dish.comments.push(this.comment);
+    this.copydish.comments.push(this.comment);
+    this.dishService.putDish(this.copydish).subscribe(
+      dish => {
+        this.dish = dish;
+        this.copydish = dish;
+      },
+      errmess => {
+        this.dish = null;
+        this.copydish = null;
+        this.errmess = <any>errmess;
+      }
+    );
     console.log(this.comment);
     this.commentForm.reset({
       author: '',
