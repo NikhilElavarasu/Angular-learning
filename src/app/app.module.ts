@@ -36,6 +36,7 @@ import { ProcessHttpMsgService } from "./services/process-http-msg.service";
 import { baseURL } from "./shared/baseurl";
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import "hammerjs";
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import "hammerjs";
     AboutComponent,
     ContactComponent,
     LoginComponent,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule,
