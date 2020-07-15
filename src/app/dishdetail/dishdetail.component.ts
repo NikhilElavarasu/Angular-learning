@@ -20,6 +20,7 @@ export class DishdetailComponent implements OnInit {
   next: string;
   comment: Comment;
   commentForm: FormGroup;
+  errmess: string;
 
   formErrors = {
     'author': '',
@@ -46,7 +47,7 @@ export class DishdetailComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+    this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds, errmess => this.errmess = errmess);
     this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
       .subscribe(dish => {
         this.dish = dish;

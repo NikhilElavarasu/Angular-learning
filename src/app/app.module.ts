@@ -32,6 +32,7 @@ import { LoginComponent } from './login/login.component';
 import { DishService } from "./services/dish.service";
 import { PromotionService } from "./services/promotion.service";
 import { LeaderService } from "./services/leader.service";
+import { ProcessHttpMsgService } from "./services/process-http-msg.service";
 import { baseURL } from "./shared/baseurl";
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import "hammerjs";
@@ -74,6 +75,7 @@ import "hammerjs";
     DishService,
     PromotionService,
     LeaderService,
+    ProcessHttpMsgService,
     { provide: 'BaseURL', useValue: baseURL },
   ],
   entryComponents: [
