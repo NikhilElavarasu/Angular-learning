@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from "@angular/common/http";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatListModule } from "@angular/material/list";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -31,6 +32,7 @@ import { LoginComponent } from './login/login.component';
 import { DishService } from "./services/dish.service";
 import { PromotionService } from "./services/promotion.service";
 import { LeaderService } from "./services/leader.service";
+import { baseURL } from "./shared/baseurl";
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import "hammerjs";
 
@@ -48,6 +50,7 @@ import "hammerjs";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatListModule,
     MatToolbarModule,
@@ -71,6 +74,7 @@ import "hammerjs";
     DishService,
     PromotionService,
     LeaderService,
+    { provide: 'BaseURL', useValue: baseURL },
   ],
   entryComponents: [
     LoginComponent,
