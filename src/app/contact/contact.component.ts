@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Feedback, ContactType } from "../shared/feedback";
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 
-import { flyInOut } from "../animations/app.animation";
+import { Feedback, ContactType } from "../shared/feedback";
+import { FeedbackService } from "../services/feedback.service";
+import { flyInOut, expand } from "../animations/app.animation";
 
 @Component({
   selector: 'app-contact',
@@ -14,17 +15,21 @@ import { flyInOut } from "../animations/app.animation";
   },
   animations: [
     flyInOut(),
+    expand(),
   ]
 })
 export class ContactComponent implements OnInit {
 
   feedback : Feedback;
+  copyfeedback: Feedback;
   feedbackForm : FormGroup;
   contact = ContactType;
+  errmess: string;
+  formVisible = 'noChange';
+  hidden = false;
 
-  @ViewChild('fform') feedbackFormDirective;
-
-  constructor(private fb : FormBuilder) {
+  constructor(private fb : FormBuilder,
+    private feedbackService: FeedbackService) {
     this.createForm();
    }
 
@@ -96,9 +101,13 @@ export class ContactComponent implements OnInit {
     }
   }
 
+  sleep(ms: number): Promise<any> {
+    return new Promise(resolve => (setTimeout(resolve, ms)));
+  }
+
   onSubmit(){
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.hidden = true;
+    this.copyfeedback = this.feedbackForm.value;
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -108,6 +117,17 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: '',
     });
-    this.feedbackFormDirective.resetForm();
+    this.feedbackService.submitFeedback(this.copyfeedback).subscribe(
+      async feedback => {
+        this.feedback = feedback;
+        await this.sleep(5000);
+        this.feedback = null;
+        this.hidden = false;
+      },
+      errmess => {
+        this.feedback = null;
+        this.errmess = errmess;
+      },
+    );
   }
 }

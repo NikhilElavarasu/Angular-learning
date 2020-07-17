@@ -32,59 +32,92 @@
     </div>
   </div>
   <hr>
-  <div fxFlex fxFlexOffset="20px" class="form-size">
+  <div fxFlex fxFlexOffset="20px" class="form-size" [hidden]="hidden" [@expand]>
     <h3>Send us the Feedback</h3>
-    <p>{{ feedbackForm.value | json}} {{ feedbackForm.status | json}}</p>
 
-    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" #fform="ngForm">
-      <p>
-        <mat-form-field class="half-width">
-          <input matInput type="text" formControlName="firstname" placeholder="First Name" required>
-          <mat-error *ngIf="formErrors.firstname">
-            {{formErrors.firstname}}
-          </mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field class="half-width">
-          <input matInput type="text" formControlName="lastname" placeholder="Last Name" required>
-          <mat-error *ngIf="formErrors.lastname">
-            {{formErrors.lastname}}
-          </mat-error>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field class="half-width">
-          <input matInput type="tel" formControlName="telnum" placeholder="tel number" pattern="[0-9]*" required>
-          <mat-error *ngIf="formErrors.telnum">
-            {{formErrors.telnum}}
-          </mat-error>
-        </mat-form-field>
-        <br>
-        <mat-form-field class="half-width">
-          <input matInput type="email" formControlName="email" placeholder="Email" email required>
-          <mat-error *ngIf="formErrors.email">
-            {{formErrors.email}}
-          </mat-error>
-        </mat-form-field>
-      </p>
-      <table class="form-size">
-        <td>
-          <mat-slide-toggle formControlName="agree">May we contact you</mat-slide-toggle>
-        </td>
-        <td>
-          <mat-select formControlName="contacttype" placeholder="how?">
-            <mat-option *ngFor="let ctype of contact" [value]="ctype">
-              {{ ctype }}
-            </mat-option>
-          </mat-select>
-        </td>
+    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+      <table class="full-width">
+        <tr>
+          <td>
+            <mat-form-field class="half-width">
+              <input matInput type="text" formControlName="firstname" placeholder="First Name" required>
+              <mat-error *ngIf="formErrors.firstname">
+                {{formErrors.firstname}}
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="half-width">
+              <input matInput type="text" formControlName="lastname" placeholder="Last Name" required>
+              <mat-error *ngIf="formErrors.lastname">
+                {{formErrors.lastname}}
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="half-width">
+              <input matInput type="tel" formControlName="telnum" placeholder="tel number" pattern="[0-9]*" required>
+              <mat-error *ngIf="formErrors.telnum">
+                {{formErrors.telnum}}
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="half-width">
+              <input matInput type="email" formControlName="email" placeholder="Email" email required>
+              <mat-error *ngIf="formErrors.email">
+                {{formErrors.email}}
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-slide-toggle formControlName="agree">May we contact you</mat-slide-toggle>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>How?</mat-label>
+              <mat-select formControlName="contacttype" class="half-width">
+                <mat-option *ngFor="let ctype of contact" [value]="ctype">
+                  {{ ctype }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
       </table>
       <p>
         <mat-form-field class="full-width">
           <textarea matInput formControlName="message" placeholder="Your Feedback" rows=12></textarea>
         </mat-form-field>
       </p>
-      <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
     </form>
+  </div>
+
+  <div [hidden]="!hidden || feedback || errmess">
+    <h3>Send us your feedback</h3>
+    <h4>Submitting Form</h4>
+    <mat-spinner></mat-spinner> <h5>Loading.. Please Wait!!</h5>
+  </div>
+
+  <div *ngIf="feedback" [@expand]>
+    <h3>Send us your feedback</h3>
+    <h4>Your Submission</h4>
+    <p>First Name: {{feedback.firstname}}</p>
+    <p>Last Name: {{feedback.lastname}}</p>
+    <p>Tel. Number: {{feedback.telnum}}</p>
+    <p>Email: {{feedback.email}}</p>
+    <p>Contact You?: {{feedback.agree}}</p>
+    <p>How?: {{feedback.contacttype}}</p>
+    <p>Feedback: {{feedback.message}}</p>
+  </div>
+  
+  <div *ngIf="errmess" [@expand]>
+    <h3>Error</h3>
+    <p>{{errmess}}</p>
   </div>
 </div>

@@ -133,7 +133,6 @@ export class DishdetailComponent implements OnInit {
         this.errmess = <any>errmess;
       }
     );
-    console.log(this.comment);
     this.commentForm.reset({
       author: '',
       rating: 5,
